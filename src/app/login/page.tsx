@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { login, signup } from './actions'
 import { Loader2, Mic, Sparkles } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 
-export default function LoginPage() {
+function LoginContent() {
     const searchParams = useSearchParams()
     const viewParam = searchParams.get('view')
 
@@ -152,5 +152,21 @@ export default function LoginPage() {
                 </div>
             </div>
         </div>
+    )
+}
+
+function LoginLoading() {
+    return (
+        <div className="flex min-h-screen w-full bg-black items-center justify-center text-white">
+            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+        </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<LoginLoading />}>
+            <LoginContent />
+        </Suspense>
     )
 }
