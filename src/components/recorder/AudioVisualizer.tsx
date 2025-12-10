@@ -7,7 +7,7 @@ interface AudioVisualizerProps {
 
 export default function AudioVisualizer({ stream, isRecording }: AudioVisualizerProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const animationRef = useRef<number>()
+    const animationRef = useRef<number | null>(null)
     const analyserRef = useRef<AnalyserNode | null>(null)
     const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null)
 
