@@ -114,10 +114,16 @@ export function useAudioRecorder() {
         }
     }, [mediaStream])
 
-    // Cleanup on unmount
+    // Cleanup timer on unmount
     useEffect(() => {
         return () => {
             if (timerRef.current) clearInterval(timerRef.current)
+        }
+    }, [])
+
+    // Cleanup media stream tracks when stream changes or unmounts
+    useEffect(() => {
+        return () => {
             if (mediaStream) mediaStream.getTracks().forEach(track => track.stop())
         }
     }, [mediaStream])
